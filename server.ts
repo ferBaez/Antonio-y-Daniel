@@ -81,6 +81,29 @@ async function startServer() {
     }
   });
 
+  // Serve the public/images folder statically at /images
+  app.use("/images", express.static(path.join(process.cwd(), "public/images")));
+
+  // API Route: Dynamic image listing from /public/images
+  app.get("/api/images", (req, res) => {
+    try {
+      const dirPath = path.join(process.cwd(), "public/images");
+      if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true });
+      }
+      const files = fs.readdirSync(dirPath);
+      // Filter image extensions
+      const images = files
+        .filter(file => /\.(jpg|jpeg|png|webp|svg|gif)$/i.test(file))
+        .map(file => `/images/${encodeURIComponent(file)}`);
+      
+      return res.status(200).json({ images });
+    } catch (e) {
+      console.error("Error listing images:", e);
+      return res.status(500).json({ error: "Error reading uploaded images directory." });
+    }
+  });
+
   // Vite development server middleware setup
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({

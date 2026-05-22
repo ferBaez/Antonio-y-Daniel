@@ -38,6 +38,36 @@ export default function App() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [privacyModalOpen, setPrivacyModalOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [images, setImages] = useState<{ src: string; alt: string }[]>(GALLERY_IMAGES);
+
+  useEffect(() => {
+    // Dynamic loading of user-uploaded images from backend
+    fetch("/api/images")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.images && data.images.length > 0) {
+          setImages(
+            data.images.map((imgUrl: string, idx: number) => ({
+              src: imgUrl,
+              alt: `Imagen de portafolio ${idx + 1}`,
+            }))
+          );
+        }
+      })
+      .catch((err) => {
+        console.error("Error al cargar las imágenes subidas:", err);
+      });
+  }, []);
+
+  // Helper to ensure marquee has enough images to continuously loop without gaps
+  const getMarqueeImages = () => {
+    if (!images || images.length === 0) return [];
+    let repeated = [...images];
+    while (repeated.length < 12) {
+      repeated = [...repeated, ...images];
+    }
+    return [...repeated, ...repeated];
+  };
 
   useEffect(() => {
     document.title = "Antonio y Daniel - Fotógrafos";
@@ -105,7 +135,7 @@ export default function App() {
             transition={{ ease: "linear", duration: 45, repeat: Infinity }}
             className="flex h-full min-w-max"
           >
-            {[...GALLERY_IMAGES, ...GALLERY_IMAGES].map((img, i) => (
+            {getMarqueeImages().map((img, i) => (
               <div key={i} className="h-full flex-shrink-0 border-r border-white/10 overflow-hidden">
                 <img 
                   src={img.src} 
@@ -173,7 +203,7 @@ export default function App() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
-            {GALLERY_IMAGES.map((img, i) => (
+            {images.map((img, i) => (
               <motion.button
                 key={i}
                 onClick={() => setLightboxIndex(i)}
@@ -194,7 +224,7 @@ export default function App() {
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all duration-300 flex items-center justify-center">
                   <ZoomIn size={28} className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-                <span className="absolute bottom-2 left-3 text-[10px] font-bold uppercase tracking-widest text-white/30 group-hover:text-white/70 transition-colors">
+                <span className="absolute bottom-2 left-3 text-[10px] font-bold uppercase tracking-widest text-[#F27D26]/75 group-hover:text-white/80 transition-colors">
                   {String(i + 1).padStart(2, "0")}
                 </span>
               </motion.button>
@@ -202,7 +232,7 @@ export default function App() {
           </div>
 
           <div className="flex justify-center pt-8 md:pt-12">
-            <a href="https://drive.google.com/file/d/1Gm5iAnViubT_CLdTrUk2d2KM8txSUbDr/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group relative inline-flex items-center justify-center gap-4 border border-white/20 bg-white/5 hover:bg-[#F27D26] hover:border-[#F27D26] px-10 py-5 rounded-full transition-all duration-500 overflow-hidden">
+            <a href="https://drive.google.com/file/d/1-iad7uMkWxg7i8CUDnT3mxnC2Qa2XeUZ/view?usp=sharing" target="_blank" rel="noopener noreferrer" className="group relative inline-flex items-center justify-center gap-4 border border-white/20 bg-white/5 hover:bg-[#F27D26] hover:border-[#F27D26] px-10 py-5 rounded-full transition-all duration-500 overflow-hidden">
               <span className="relative z-10 text-xs md:text-sm uppercase tracking-[0.2em] font-bold text-white">Portafolios</span>
               <ArrowRight size={18} className="relative z-10 text-white group-hover:translate-x-1 transition-transform duration-300" />
             </a>
@@ -227,13 +257,13 @@ export default function App() {
               <XIcon size={22} />
             </button>
             <button
-              onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length); }}
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex - 1 + images.length) % images.length); }}
               className="absolute left-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-[#F27D26] border border-white/15 text-white rounded-full p-3 transition-all cursor-pointer z-10"
             >
               <ChevronLeft size={22} />
             </button>
             <button
-              onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % GALLERY_IMAGES.length); }}
+              onClick={(e) => { e.stopPropagation(); setLightboxIndex((lightboxIndex + 1) % images.length); }}
               className="absolute right-4 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-[#F27D26] border border-white/15 text-white rounded-full p-3 transition-all cursor-pointer z-10"
             >
               <ChevronRight size={22} />
@@ -244,13 +274,13 @@ export default function App() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.93 }}
               transition={{ duration: 0.25 }}
-              src={GALLERY_IMAGES[lightboxIndex].src}
-              alt={GALLERY_IMAGES[lightboxIndex].alt}
+              src={images[lightboxIndex].src}
+              alt={images[lightboxIndex].alt}
               onClick={(e) => e.stopPropagation()}
               className="max-w-[90vw] max-h-[88vh] object-contain rounded-xl shadow-2xl"
             />
-            <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-xs uppercase tracking-widest text-white/40 font-bold">
-              {String(lightboxIndex + 1).padStart(2, "0")} / {String(GALLERY_IMAGES.length).padStart(2, "0")}
+            <span className="absolute bottom-5 left-1/2 -translate-x-1/2 text-xs uppercase tracking-widest text-[#F27D26]/75 font-bold">
+              {String(lightboxIndex + 1).padStart(2, "0")} / {String(images.length).padStart(2, "0")}
             </span>
           </motion.div>
         )}

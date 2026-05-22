@@ -1,30 +1,24 @@
 import { Photo, BackgroundImage } from "./types";
 
-// Import the generated background assets using exact paths
-import bg1 from "./assets/images/fashion_bg_one_1779412474092.png";
-import bg2 from "./assets/images/fashion_bg_two_1779412489163.png";
-import bg3 from "./assets/images/fashion_bg_three_1779412504036.png";
-import bg4 from "./assets/images/fashion_bg_four_1779412519104.png";
-
 export const CAROUSEL_IMAGES: BackgroundImage[] = [
   {
     id: "bg-1",
-    url: bg1,
+    url: "https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&q=80&w=1920",
     title: "Sinfonía en Rojo y Azul"
   },
   {
     id: "bg-2",
-    url: bg2,
+    url: "https://images.unsplash.com/photo-1549064482-6779ba3292fe?auto=format&fit=crop&q=80&w=1920",
     title: "Fumata Naranja y Turquesa"
   },
   {
     id: "bg-3",
-    url: bg3,
+    url: "https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&q=80&w=1920",
     title: "Prismas del Alma"
   },
   {
     id: "bg-4",
-    url: bg4,
+    url: "https://images.unsplash.com/photo-1539109136881-3be0616acf4b?auto=format&fit=crop&q=80&w=1920",
     title: "El Destello de la Penumbra"
   }
 ];
