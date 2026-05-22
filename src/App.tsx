@@ -275,7 +275,7 @@ export default function App() {
             method="POST"
             className="flex flex-col gap-4 md:gap-6 w-full max-w-xl mx-auto text-left"
           >
-            <input type="hidden" name="_next" value={location.href} />
+            <input type="hidden" name="_next" value={typeof window !== "undefined" ? window.location.href : ""} />
             <input type="hidden" name="_subject" value="Nuevo contacto desde el sitio web de Antonio y Daniel" />
             <input type="hidden" name="_captcha" value="false" />
             
