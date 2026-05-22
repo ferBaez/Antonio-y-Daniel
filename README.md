@@ -1,11 +1,17 @@
-<div align="center">
+# Antonio y Daniel - Fotógrafos
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Portafolio de la dupla de fotógrafos de moda y publicidad, Antonio y Daniel.
+Construido con React, Tailwind CSS y Vite.
 
-  <h1>Built with AI Studio</h2>
+## Desarrollo
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+```bash
+npm install
+npm run dev
+```
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Producción
 
-</div>
+```bash
+npm run build
+```

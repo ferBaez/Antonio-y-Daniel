@@ -1,0 +1,8 @@
+{
+  "name": "Antonio y Daniel - Fotógrafos",
+  "description": "Portafolio profesional de Antonio y Daniel, fotógrafos internacionales de moda y dirección de arte que desafían la realidad a través del surrealismo, la luz y el color.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
