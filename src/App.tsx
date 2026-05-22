@@ -12,25 +12,24 @@ import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, Menu, X, X as XIcon, ChevronLeft, ChevronRight, ZoomIn, ArrowRight } from "lucide-react";
 import React, { useState, useEffect } from "react";
 
-// Use the exact images from the reference site
-const BaseUrl = "https://ferbaez.github.io/Ivan-Aguirre/";
+// Use the newly uploaded portfolio images from public/images
 const GALLERY_IMAGES = [
-  { src: `${BaseUrl}image_opt%20(1).jpeg`, alt: "Editorial styling" },
-  { src: `${BaseUrl}image_opt%20(2).jpeg`, alt: "Surreal photography" },
-  { src: `${BaseUrl}image_opt%20(3).jpeg`, alt: "Conceptual art" },
-  { src: `${BaseUrl}image_opt%20(4).jpeg`, alt: "Creative direction" },
-  { src: `${BaseUrl}image_opt%20(5).jpeg`, alt: "Surrealist composition" },
-  { src: `${BaseUrl}image_opt%20(6).jpeg`, alt: "Brand image" },
-  { src: `${BaseUrl}image_opt%20(7).jpeg`, alt: "Fashion campaign" },
-  { src: `${BaseUrl}image_opt.jpeg`, alt: "Photorealistic portrait" },
-  { src: `${BaseUrl}ivan%20004_opt.jpeg`, alt: "Product visualization" },
-  { src: `${BaseUrl}diana%20003_opt.jpeg`, alt: "Fashion portrait" },
-  { src: `${BaseUrl}flesh-mafazine-2.jpg`, alt: "Visual transformation" },
-  { src: `${BaseUrl}Ivan%20Aguirre%20Portafolios%2036_opt.jpeg`, alt: "Landscape composition" },
-  { src: `${BaseUrl}INSTAGRAM%20%20MARIANA%20TREVIN%CC%83O3_opt.jpeg`, alt: "Conceptual art" },
-  { src: `${BaseUrl}CleanShot%202026-05-18%20at%2021_opt.jpeg`, alt: "Brand image" },
-  { src: `${BaseUrl}77461487238731_opt.jpeg`, alt: "Surrealist composition" },
-  { src: `${BaseUrl}WhatsApp%20Image%202026-05-18%20at%2015_opt.jpeg`, alt: "Editorial fashion" },
+  { src: "images/12843_opt.jpeg", alt: "Editorial styling" },
+  { src: "images/30683_opt.jpeg", alt: "Surreal photography" },
+  { src: "images/CLL1_opt.jpeg", alt: "Conceptual art" },
+  { src: "images/CPB21_opt.jpeg", alt: "Creative direction" },
+  { src: "images/CleanShot%202026-05-22%20at%2009_opt.jpeg", alt: "Surrealist composition" },
+  { src: "images/Copia%20de%20image_opt%202.jpeg", alt: "Brand image" },
+  { src: "images/Copia%20de%20image_opt%203.jpeg", alt: "Fashion campaign" },
+  { src: "images/Copia%20de%20image_opt%204.jpeg", alt: "Photorealistic portrait" },
+  { src: "images/Copia%20de%20image_opt%205.jpeg", alt: "Product visualization" },
+  { src: "images/Copia%20de%20image_opt.jpeg", alt: "Fashion portrait" },
+  { src: "images/FF3_opt.jpeg", alt: "Visual transformation" },
+  { src: "images/GP4_opt.jpeg", alt: "Landscape composition" },
+  { src: "images/HM6_opt.jpeg", alt: "Conceptual art" },
+  { src: "images/MYF1_opt.jpeg", alt: "Brand image" },
+  { src: "images/image_opt%20(8).jpeg", alt: "Surrealist composition" },
+  { src: "images/image_opt.jpeg", alt: "Editorial fashion" }
 ];
 
 export default function App() {
